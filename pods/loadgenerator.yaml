@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: loadgenerator
+spec:
+  containers:
+  - name: loadgenerator
+    image: neotys/neoload-loadgenerator:6.5.1
+    ports:
+    - containerPort: 7100
