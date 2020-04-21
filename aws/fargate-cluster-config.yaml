@@ -5,12 +5,12 @@ kind: ClusterConfig
 
 metadata:
   name: neoload-02
-  region: ap-northeast-1
+  region: us-east-1
 
-nodeGroups:
-  - name: ng-1
-    instanceType: m5.large
-    desiredCapacity: 1
+# nodeGroups:
+#   - name: ng-1
+#     instanceType: m5.large
+#     desiredCapacity: 1
 
 fargateProfiles:
   - name: fp-default
