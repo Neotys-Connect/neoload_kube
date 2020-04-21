@@ -33,3 +33,5 @@ kubectl get pods
 kubectl describe [pod-or-node-name]
 kubectl logs [pod-name]
 ```
+
+More kubectl commands can be found in the [kubectl cheat sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
