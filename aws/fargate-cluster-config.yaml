@@ -4,8 +4,8 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: neoload-02
-  region: us-east-1
+  name: neoload-01
+  region: us-east-2
 
 # nodeGroups:
 #   - name: ng-1
