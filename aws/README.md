@@ -1,6 +1,6 @@
 # AWS (EKS + Fargate) examples
 
-##Prerequisites##
+## Prerequisites ##
 
 - [Install Python 3.7+](https://www.python.org/downloads/), required for AWS CLI v2
 - [Install and configure the AWS CLI **v2**](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
@@ -11,7 +11,7 @@
 - [Install and configure AWS 'eksctl'](https://eksctl.io/introduction/#installation)
     - Make sure that you can run ```eksctl get cluster``` without errors
 
-##What are we doing here?###
+## What are we doing here? ##
 
 Who wants to have to think about spinning up machines (or containers) before running a test, really? But what's the alternative?
 
@@ -21,13 +21,13 @@ NeoLoad Web can be configured to use a Kubernetes cluster to spin up and down lo
 
 Cluster setup is a one-time thing. The Kubernetes system can either also run on Fargate containers or on a static node/group separate from where the load resources are provisioned. The 'fp-neoload' profile in the YAML uses a 'selector' namespace value which should match the Helm release name in order to schedule load pods/containers on Fargate.
 
-##Why are we using eksctl instead of Fargate or CloudFormation in the AWS web GUI?##
+## Why are we using eksctl instead of Fargate or CloudFormation in the AWS web GUI? ##
 
 The answer is simple. Command lines are easier than the AWS GUI, since it changes all the time :)
 
 Seriously though, eksctl actually creates a CloudFormation stack in the background to set up your Kubernetes cluster. And though some advanced organizations prefer to use CloudFormation (often to specify IAM policies and certificates), many of these things are dramatically simplified with eksctl.
 
-##Simple steps for NeoLoad/Fargate setup##
+## Simple steps for NeoLoad/Fargate setup ##
 
 1. [Create a custom cluster config file](fargate-cluster-config.yaml) that has a second non-default profile with a proper namespace (and no additional selection filters/labels)
 NOTE: More details on eksctl usage with fargate can be found [here](https://eksctl.io/usage/fargate/)
