@@ -1,15 +1,6 @@
 # AWS (EKS + Fargate) examples
 
-## Prerequisites ##
-
-- [Install Python 3.7+](https://www.python.org/downloads/), required for AWS CLI v2
-- [Install and configure the AWS CLI **v2**](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-    - Verify you are using the right version: ```aws --version```
-        -   should produce something like ```aws-cli/2.0.59 ...```
-    - Log in to your AWS account via: ```aws configure``` if not already done
-    - Make sure that you can run ```aws eks list-clusters``` without errors
-- [Install and configure AWS 'eksctl'](https://eksctl.io/introduction/#installation)
-    - Make sure that you can run ```eksctl get cluster``` without errors
+This document describes how to set up AWS and NeoLoad Web to use elastic compute resources for on-demand load testing.
 
 ## What are we doing here? ##
 
@@ -26,6 +17,17 @@ Cluster setup is a one-time thing. The Kubernetes system can either also run on 
 The answer is simple. Command lines are easier than the AWS GUI, since it changes all the time :)
 
 Seriously though, eksctl actually creates a CloudFormation stack in the background to set up your Kubernetes cluster. And though some advanced organizations prefer to use CloudFormation (often to specify IAM policies and certificates), many of these things are dramatically simplified with eksctl.
+
+## Prerequisites ##
+
+- [Install Python 3.7+](https://www.python.org/downloads/), required for AWS CLI v2
+- [Install and configure the AWS CLI **v2**](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+    - Verify you are using the right version: ```aws --version```
+        -   should produce something like ```aws-cli/2.0.59 ...```
+    - Log in to your AWS account via: ```aws configure``` if not already done
+    - Make sure that you can run ```aws eks list-clusters``` without errors
+- [Install and configure AWS 'eksctl'](https://eksctl.io/introduction/#installation)
+    - Make sure that you can run ```eksctl get cluster``` without errors
 
 ## Simple steps for NeoLoad/Fargate setup ##
 
