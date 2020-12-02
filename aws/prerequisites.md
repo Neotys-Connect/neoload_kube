@@ -8,3 +8,5 @@
     - Make sure that you can run ```aws eks list-clusters``` without errors
 - [Install and configure AWS 'eksctl'](https://eksctl.io/introduction/#installation)
     - Make sure that you can run ```eksctl get cluster``` without errors
+- [Install Helm](https://helm.sh/docs/intro/install/#through-package-managers)
+    - Make sure that you can run ```helm version``` without errors
