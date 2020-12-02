@@ -99,3 +99,5 @@ neoload:
       - name: FILE_PROJECT_MAX_SIZE_IN_BYTES
         value: "300000000"
 ```
+
+NOTE: a full list of NGINX ingress annotations is available [here](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)
