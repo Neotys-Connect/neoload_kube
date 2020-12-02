@@ -33,4 +33,7 @@
    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-0.32.0/deploy/static/provider/aws/deploy.yaml
    ```
 
+4. Update your DNS records (such as Route53) to point to your new AWS load balancer for
+   the web/api/files hostnames mentioned in 'values-custom.yaml'.
+
 NOTE: For deployments requiring SSL/TLS connections, these instructions will be updated shortly.
