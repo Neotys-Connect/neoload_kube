@@ -1,0 +1,15 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: nlw-eks
+  region: us-east-2
+
+vpc:
+  cidr: 172.16.0.0/12
+
+nodeGroups:
+  - name: ng-1
+    instanceType: m5.xlarge
+    desiredCapacity: 1
+    volumeSize: 30
