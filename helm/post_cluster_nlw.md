@@ -1,5 +1,11 @@
 ## After Kube cluster setup, install NeoLoad Web ##
 
+- [Install NeoLoad Web via Helm Chart](#install-neoLoad-web-via-helm-chart)
+- [Securing your NeoLoad Web installation with SSL/TLS Certificates](#securing-your-neoLoad-web-installation-with-SSL-TLS-certificates)
+- [Changing the default Files Upload size](#changing-the-default-files-upload-size)
+
+### Install NeoLoad Web via Helm Chart ###
+
 1. NeoLoad Web requires Mongo as a data store, so you will have to provision a Mongo
    cluster first. Since you are ultimately responsible for creating, backup, monitoring,
    upgrading, and all other management activities related to this cluster, we recommend
@@ -36,4 +42,60 @@
 4. Update your DNS records (such as Route53) to point to your new AWS load balancer for
    the web/api/files hostnames mentioned in 'values-custom.yaml'.
 
-NOTE: For deployments requiring SSL/TLS connections, these instructions will be updated shortly.
+
+### Securing your NeoLoad Web installation with SSL/TLS Certificates ###
+
+Whether externally or internally facing, it never hurts to secure the traffic to your apps and APIs
+ and NeoLoad Web is no different. Specifically in AWS, ACM (AWS Certificates Manager) is often the
+ preferred source for certificates. However, some organizations often to use certificates generated
+ from another source.
+
+#### Using your own certificate (incl. public and private keys) ####
+
+This situation is accounted for in the NeoLoad Web Helm values-custom.yaml file under the TLS section.
+
+#### Using a Certificate from ACM ####
+
+Generally speaking, we will be following the [AWS directions here](https://aws.amazon.com/premiumsupport/knowledge-center/terminate-https-traffic-eks-acm/), specific to ACM usage for EKS clusters.
+
+1. Generate the certificate in ACM using a wildcard '*.' prefix to the domain or subdomain that parents
+ the three hostnames (neoload-web / neoload-api / neoload-files) so that you only need to deal with one certificate
+ for all three subdomains. For instance, a certificate for '*.neoload.yourdomain.org' will cover 'web.neoload.yourdomain.org', 'api.neoload.yourdomain.org, and 'files.neoload.yourdomain.org'.
+
+ NOTE: copy the ARN of your certificate for later use
+
+2. Using the recommended ingress option (NGINX) above, you will then need to properly configure the NGINX
+ ingress controller to use this certificate. [See instructions here](https://kubernetes.github.io/ingress-nginx/deploy/#aws) for NLB 'deploy-tls-termination.yaml' custom
+ patch file. Make sure you use the CIDR of the VPC used by your cluster, not necessarily the CIDR specified
+ on the cluster overview in EKS console.
+
+3. Once the above update has been applied, you will need to confirm that the AWS NLW routing traffic to
+ your cluster has received the appropriate configuration by looking at Listeners under the specific NLB record
+ through the EC2 Load Balancers console section. If it doesn't, you may have to manually apply the certificate
+ to an HTTPS/443 listener.
+
+### Changing the default Files Upload size ###
+
+When uploading projects to NeoLoad Web, the backend files service defaults to a max size of 250mb. However
+ when using NGINX, there is no annotation to allow this size (default 1m) on the NGINX ingress controller.
+ To control this value, you will need to change it both in the environment variables of the deployed backend pod
+ and in the NGINX annotations as follows:
+
+**In values-custom.yaml:**
+```
+...
+ingress:
+  ...
+  annotations:
+    ...
+    nginx.ingress.kubernetes.io/proxy-body-size: 300m
+...
+[and]
+...
+neoload:
+  configuration:
+    backend:
+      others:
+      - name: FILE_PROJECT_MAX_SIZE_IN_BYTES
+        value: "300000000"
+```
