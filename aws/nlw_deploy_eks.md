@@ -29,4 +29,4 @@ create a Kubernetes cluster and run standard "installers".
 
     If you'd like, you can monitor the cluster creation process in CloudFormation stacks via browser, or you can use a tool like [cfn-tail](https://github.com/taimos/cfn-tail) to tail in a separate console window.
 
-3. Continue [setup with our NeoLoad Helm instructions](../helm/post_cluster_nlw.md)
+3. Continue [installation with our NeoLoad Helm instructions](../helm/post_cluster_nlw.md)

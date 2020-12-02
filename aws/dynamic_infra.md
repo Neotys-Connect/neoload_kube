@@ -33,4 +33,4 @@ NOTE: More details on eksctl usage with fargate can be found [here](https://eksc
 
     If you'd like, you can monitor the cluster creation process in CloudFormation stacks via browser, or you can use a tool like [cfn-tail](https://github.com/taimos/cfn-tail) to tail in a separate console window.
 
-3. Continue [setup with our NeoLoad Helm instructions](../helm/post_cluster_infra.md)
+3. Continue [preparation with our NeoLoad Helm instructions](../helm/post_cluster_infra.md)
